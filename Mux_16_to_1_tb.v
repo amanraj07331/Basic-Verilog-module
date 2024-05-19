@@ -1,0 +1,21 @@
+module test;
+
+  reg [15:0] A;
+  reg [3:0] S;
+  wire F;
+
+  mux_16_to_1 M(.in(A), .sel(S), .Out(F));
+
+  initial begin
+    $dumpfile("mux_16_to_1.vcd");
+    $dumpvars(0, test);
+    $monitor($time, " A= %h, S=%h, F=%b", A, S, F);
+
+    #5 A = 16'h3F0A; S = 4'h0;
+    #5 S = 4'h1;
+    #5 S = 4'h6;
+    #5 S = 4'hC;
+    #5 $finish;
+  end
+
+endmodule
